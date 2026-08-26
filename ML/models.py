@@ -10,11 +10,11 @@ from sklearn.tree import(
     DecisionTreeRegressor
 )
 
-from sklear.ensemble import(
+from sklearn.ensemble import (
     RandomForestClassifier,
     RandomForestRegressor,
-    GradientBosstingClassifier,
-    GradientBosstingRegressor
+    GradientBoostingClassifier,
+    GradientBoostingRegressor
 )
 
 from sklearn.neighbors import (
@@ -24,7 +24,7 @@ from sklearn.neighbors import (
 
 from sklearn.svm import(
     SVC,
-    SVM
+    SVR
 )
 
 from sklearn.naive_bayes import(
@@ -50,7 +50,7 @@ CLASSIFICATION_MODELS = {
             n_jobs=-1
         ),
     "gradient":
-        GradientBosstingClassifier(
+        GradientBoostingClassifier(
             random_state=42
         ),
 
@@ -71,37 +71,41 @@ CLASSIFICATION_MODELS = {
 
 REGRESSION_MODELS = {
 
-    "Linear"
+    "Linear":
         LinearRegression(),
 
     "Decision":
-        DecisionTreeClassifier(
+        DecisionTreeRegressor(
             random_state=42
         ),
 
     'Random':
-        RandomForestClassifier(
+        RandomForestRegressor(
             n_estimators=100,
             random_state=42,
             n_jobs=-1
         ),
+        
     "gradient":
-        GradientBosstingClassifier(
+        GradientBoostingRegressor(
             random_state=42
         ),
 
     "KNN":
-        KNeighborsClassifier(),
+        KNeighborsRegressor(),
 
-    "SVM":
-        SVC(
-            probability=True,
-            random_state=42
-        ),
+    "lasso":
+        Lasso(),
 
-    "Naive":
-        GaussianNB()
-
-        
+    "Ridge":
+        Ridge()
+      
 }
+
+def get_models(problem_type):
+
+    if problem_type == "CLASSIFICATION":
+        return CLASSIFICATION_MODELS
+    else:
+        return REGRESSION_MODELS
 

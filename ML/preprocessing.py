@@ -8,7 +8,7 @@ from sklearn.preprocessing import(
     StandardScaler
 )
 
-def create_preprocessort(X):
+def create_preprocessor(X):
 
     numerical_columns=X.select_dtypes(
         include=["int64","float64","int32","float32"]
@@ -52,14 +52,21 @@ def create_preprocessort(X):
 
     if numerical_columns:
         transformers.append(
-            numerical_pipeline,
-            numerical_columns
+            (
+                "Numerical",
+                numerical_pipeline,
+                numerical_columns
+            )
         )
+
 
     if categorical_columns:
         transformers.append(
-            categorical_pipeline,
-            categorical_columns
+           ( 
+                "categorical",
+                categorical_pipeline,
+                categorical_columns
+           )
         )
 
     
